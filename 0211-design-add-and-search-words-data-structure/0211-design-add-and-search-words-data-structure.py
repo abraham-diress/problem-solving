@@ -19,32 +19,18 @@ class WordDictionary:
         if len(word) > self.max_length:
             return False
         def modifiedSearch(i, node):
-            curr = self.root
-            i = 0
-            stack = [(0, curr)]
-            while stack:
-                i, node = stack.pop()
-                if i == len(word) and node.isEnd:
-                    return True
-                if i == len(word):
-                    continue
+            if not node:
+                return False
+            if i == len(word):
+                return node.isEnd
+            
+            if word[i] == ".":
+                for child in node.children:
+                    if child and modifiedSearch(i + 1, child):
+                        return True        
+            else:
                 idx = ord(word[i]) - ord('a')
-                if word[i] == '.':
-                    for child in node.children:
-                        if child:
-                            stack.append((i + 1, child))
-                elif node.children[idx]:
-                    stack.append((i + 1, node.children[idx]))   
-            return False        
-        #     if i == len(word):
-        #         return node.isEnd
-        #     if word[i] == ".":
-        #         for child in node.children:
-        #             if child and modifiedSearch(i + 1, child):
-        #                 return True        
-        #     else:
-        #         idx = ord(word[i]) - ord('a')
-        #         return node.children[idx] and modifiedSearch(i + 1, node.children[idx])    
+                return node.children[idx] and modifiedSearch(i + 1, node.children[idx])    
                     
         return modifiedSearch(0, self.root)
 class TrieNode:
