@@ -17,22 +17,25 @@ class WordDictionary:
 
     def search(self, word: str) -> bool:
         if len(word) > self.max_length:
-            return False
+                return False
+        
         def modifiedSearch(i, node):
             if not node:
-                return False
+                return False 
             if i == len(word):
                 return node.isEnd
             
-            if word[i] == ".":
+            if word[i] == '.':
                 for child in node.children:
                     if child and modifiedSearch(i + 1, child):
-                        return True        
+                        return True
             else:
-                idx = ord(word[i]) - ord('a')
-                return node.children[idx] and modifiedSearch(i + 1, node.children[idx])    
-                    
+                idx = ord(word[i]) - ord('a') 
+                if node.children[idx] and modifiedSearch(i + 1, node.children[idx]):
+                    return True
+                
         return modifiedSearch(0, self.root)
+                        
 class TrieNode:
     def __init__(self):
         self.children = [None for _ in range(26)]
