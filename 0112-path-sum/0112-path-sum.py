@@ -7,19 +7,28 @@
 class Solution:
     def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
         
-        return self.dfs(root, 0, targetSum)
+        if not root:
+            return False 
+        
+        stack = []
+        stack.append((root, root.val))
+        
+        while stack:
+            node, val = stack.pop()
+            
+            if not node.right and not node.left  and val == targetSum:
+                return True
+            
+            if node.left:
+                stack.append((node.left, node.left.val + val))
+                
+            if node.right:
+                stack.append((node.right, node.right.val + val))
+                
+        return False
+                
     
-    def dfs(self, node, curSum, targetSum):
-        if not node:
-            return 
-        
-        curSum += node.val
-        
-        if not node.right and not node.left:
-            return curSum == targetSum
-        
-        return (self.dfs(node.left, curSum, targetSum) or
-        self.dfs(node.right, curSum, targetSum))
+    #stack 
         
         
         
