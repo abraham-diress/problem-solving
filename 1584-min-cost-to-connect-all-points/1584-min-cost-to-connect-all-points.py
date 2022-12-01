@@ -1,61 +1,36 @@
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
-        
-        edges = [] #[_from, _to, cost]
+    
+        minHeap = []
         n = len(points)
+        visited = [ False for _ in range(n) ]
+        visited[0] = True
         
-        for i in range(n):
-            first_x, first_y = points[i]
+        first_x, first_y = points[0] 
+        
+        for i in range(1, n):
+            second_x, second_y = points[i]
+            cost = abs(first_x - second_x) + abs(first_y - second_y)
+            minHeap.append((cost, 0, i))
             
-            for j in range(i + 1, n):
-                second_x, second_y = points[j]
-                cost = abs(first_x - second_x) + abs(first_y - second_y)
-                edges.append((i, j, cost))
-                
-        edges.sort( key = lambda x: x[2])
-        obj = DisjointSet(n)
+        heapq.heapify(minHeap)
         answer = 0
         count = n - 1
         
-        for _from, _to, cost in edges:
-            if obj.union(_from, _to):
+        while minHeap and count > 0:
+            cost, _from, _to = heapq.heappop(minHeap)
+            if visited[_to] == False:
                 answer += cost
                 count -= 1
-            if count == 0:
-                break
+                visited[_to] = True
                 
+                first_x, first_y = points[_to]
+                for i in range(n):
+                    if not visited[i]:
+                        second_x, second_y = points[i]
+                        cost = abs(first_x - second_x) + abs(first_y - second_y)
+                        heapq.heappush(minHeap, (cost, 0, i))
+                        
         return answer
-    
-
-class DisjointSet:
-    def __init__(self, n):
-        self.root = [ i for i in range(n) ]
-        self.rank = [0] * n 
-        
-    def find(self, x):
-        if x != self.root[x]:
-            self.root[x] = self.find(self.root[x])
-            
-        return self.root[x]
-    
-    def union(self, x, y):
-        root_x = self.find(x)
-        root_y = self.find(y)
-        
-        if root_x == root_y:
-            return False
-        
-        if self.rank[root_x] > self.rank[root_y]:
-            self.root[root_y] = root_x
-        elif self.rank[root_y] > self.rank[root_x]:
-            self.root[root_x] = root_y
-        else:
-            self.root[root_y] = root_x
-            self.rank[root_x] += 1
-        
-        return True
-            
-        
-        
-        
+                        
         
