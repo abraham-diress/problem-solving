@@ -1,10 +1,10 @@
 class Solution:
-    def swap(self, mp, toInsert, toRemove): 
-        mp[toInsert]+=1
-        mp[toRemove]-=1
+    def swap(self, mp, ch1, ch2): 
+        mp[ch1]+=1
+        mp[ch2]-=1
         
-        if(mp[toRemove]==0):
-            del mp[toRemove] 
+        if(mp[ch2]==0):
+            del mp[ch2] 
         
         
     def isItPossible(self, word1: str, word2: str) -> bool:
