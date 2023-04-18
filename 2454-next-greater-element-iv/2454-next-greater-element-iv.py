@@ -4,6 +4,7 @@ class Solution:
         output = [-1] * n
         stack = []
         second = []
+        
         for i in range(n):
             while second and nums[i] > nums[second[-1]]:
                 curr = second.pop()
