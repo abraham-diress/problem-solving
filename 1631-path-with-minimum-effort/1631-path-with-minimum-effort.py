@@ -2,11 +2,10 @@ class Solution:
     def minimumEffortPath(self, heights: List[List[int]]) -> int:
         m, n = len(heights), len(heights[0])
         res = 0
-        heap = [(0, 0, 0)] 
+        min_heap = [(0, 0, 0)] 
         
-        while heap:
-            diff, x, y = heappop(heap)
-            
+        while min_heap:
+            diff, x, y = heappop(min_heap)
             res = max(res, diff)
             
             if x == m-1 and y == n-1:
@@ -23,6 +22,6 @@ class Solution:
                 
                 if 0 <= new_x < m and 0 <= new_y < n and heights[new_x][new_y] != 0:
                     new_diff = abs(heights[new_x][new_y] - curr_height)
-                    heappush(heap, (new_diff, new_x, new_y))
+                    heappush(min_heap, (new_diff, new_x, new_y))
         
         return res
