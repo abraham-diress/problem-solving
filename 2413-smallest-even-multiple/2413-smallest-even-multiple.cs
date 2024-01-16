@@ -1,9 +1,5 @@
-class Solution:
-    def smallestEvenMultiple(self, n: int) -> int:
-        if not n % 2:
-            return n
-        else:
-            return n * 2
-        
-        
-        
+public class Solution {
+    public int SmallestEvenMultiple(int n) {
+        return n % 2 == 1 ? n * 2 : n;
+    }
+}
