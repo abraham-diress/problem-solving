@@ -1,11 +1,6 @@
 class Solution:
-    def findNonMinOrMax(self, nums: List[int]) -> int:
-        _min, _max = min(nums), max(nums)
+    def findNonMinOrMax(self, nums: List[int]) -> int: 
+        return heapq.nlargest(2, nums)[-1] if len(nums) > 2 else -1
         
-        for num in nums:
-            if num != _min and num != _max:
-                return num
-        
-        return -1
             
         
