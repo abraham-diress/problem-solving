@@ -1,10 +1,7 @@
 class Solution:
-    def numJewelsInStones(self, jewels: str, stones: str) -> bool:
-        res = 0
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:
+        pattern = f'[{re.escape(jewels)}]'
         
-        for jewel in jewels:
-            for stone in stones:
-                if jewel == stone:
-                    res += 1
+        return len(re.findall(pattern, stones))
         
-        return res
+        
