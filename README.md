@@ -19,6 +19,7 @@ A collection of LeetCode questions to ace the coding interview! - Created using 
 | [0121-best-time-to-buy-and-sell-stock](https://github.com/abraham-diress/problem-solving/tree/master/0121-best-time-to-buy-and-sell-stock) |
 | [0167-two-sum-ii-input-array-is-sorted](https://github.com/abraham-diress/problem-solving/tree/master/0167-two-sum-ii-input-array-is-sorted) |
 | [2856-count-complete-subarrays-in-an-array](https://github.com/abraham-diress/problem-solving/tree/master/2856-count-complete-subarrays-in-an-array) |
+| [3685-count-subarrays-of-length-three-with-a-condition](https://github.com/abraham-diress/problem-solving/tree/master/3685-count-subarrays-of-length-three-with-a-condition) |
 ## Binary Search
 |  |
 | ------- |
